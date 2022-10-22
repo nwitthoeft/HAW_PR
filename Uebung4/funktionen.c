@@ -524,7 +524,7 @@ sAirport* enterWaypoints(sAirport** kopf, int n, int* m) {
 
 	while ((c = fgetc(stdin)) != '\n' && c != EOF);
 	for (int i = 0; i <= anzDerWegpunkte; i++) {
-		printf("Geben sie den %d. Wegpunkt ein:", i);
+		printf("Geben sie den %d. Wegpunkt (ICAO) ein:", i);
 		printf("\n");
 		fgets(nameTempBuffer, BUFFER_GROESSE, stdin);
 		nameLaenge = strlen(nameTempBuffer);
