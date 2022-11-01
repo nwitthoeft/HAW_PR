@@ -17,11 +17,11 @@ void main() {
 	char eingabe2;
 	sAirport* kopf = NULL;
 	sAirport* ende = NULL;
+	printf("Kopf-Adresse: %p", &kopf);
 	int m;
 	int n = 0;
 	sAirport* kopfWegpunkt = NULL;
 	int kontrollvar = 0;
-
 	do {
 		printf("\nFolgenden Funktionen sind verfuegbar:\n\n"
 			"E/e: Eingabe von Daten\n"

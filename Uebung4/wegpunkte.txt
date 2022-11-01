@@ -1,7 +1,4 @@
 ##Flightplan##
-00 EDAC | DE | Altenburg-Nobitz Airport, 640 ft, 0.000000 km
-01 EDAH | DE | Heringsdorf Airport, 93 ft, 341.258090 km
-02 EDGJ | DE | Ochsenfurt Airport, 814 ft, 887.087359 km
-03 EDQI | DE | Lauf-Lillinghof Airport, 1788 ft, 974.829467 km
-04 EDQA | DE | Airport Bamberg-Breitenau, 811 ft, 1018.843876 km
-05 EDPW | DE | Thalmässing-Waizenhofen Airport, 1893 ft, 1116.520032 km
+00 EDDH | DE | Hamburg Helmut Schmidt Airport, 53 ft, 0.000000 km
+01 KLGA | US | La Guardia Airport, 21 ft, 6120.149116 km
+02 KSFO | US | San Francisco International Airport, 13 ft, 10265.961385 km

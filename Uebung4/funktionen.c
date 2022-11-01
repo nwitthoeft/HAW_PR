@@ -135,11 +135,11 @@ void ausgabe(sAirport** kopf) {
 	switch (eingabe) {
 	case 'V':
 	case 'v':
-		vonVorneAusgabe(&kopf);
+		vonVorneAusgabe(kopf);
 		break;
 	case 'H':
 	case 'h':
-		vonHintenAusgabe(&kopf);
+		vonHintenAusgabe(kopf);
 		break;
 	default:
 		printf("Sie haben keinen der oben genannte Operatoren ausgewaehlt. Bitte versuchen Sie es nochmal\n");
@@ -155,12 +155,12 @@ In dieser Funktion kann die Liste von vorne ausgegeben werden.
 Parameter: kopf der Liste
 Rückgabewert: void
 */
-void vonVorneAusgabe(sAirport*** kopf)
+void vonVorneAusgabe(sAirport** kopf)
 {
 	struct sAirport* aktuellesElement;
 	printf("\nFolgenden Flughafendaten sind gespeichert worden...\n");
-	aktuellesElement = **kopf;
-
+	aktuellesElement = *kopf;
+	char gradZeichen = 248; //° in ASCII
 	if (aktuellesElement == NULL) {
 		printf("Die Liste ist Leer");
 		return;
@@ -170,9 +170,9 @@ void vonVorneAusgabe(sAirport*** kopf)
 	{
 		printf("ICAO: %s\n", aktuellesElement->ICAO);
 		printf("Flughafenname: %s\n", aktuellesElement->flugHafenName);
-		printf("Laengengrad: %lf\n", aktuellesElement->koordnaten.laengenGrad);
-		printf("Breitengrad: %lf\n", aktuellesElement->koordnaten.breitenGrad);
-		printf("Hoehe: %d\n", aktuellesElement->hoehe);
+		printf("Breitengrad: %lf %cN\n", aktuellesElement->koordnaten.breitenGrad, gradZeichen);
+		printf("Laengengrad: %lf %cE\n", aktuellesElement->koordnaten.laengenGrad, gradZeichen);
+		printf("Hoehe: %d ft\n", aktuellesElement->hoehe);
 		printf("Laenderkuerzel: %s\n\n", aktuellesElement->laenderKuerzel);
 		aktuellesElement = aktuellesElement->next;//lauf
 	}
@@ -186,10 +186,11 @@ In dieser Funktion kann die Liste von hinten ausgegeben werden.
 Parameter: kopf der Liste
 Rückgabewert: void
 */
-void vonHintenAusgabe(sAirport*** kopf) {
+void vonHintenAusgabe(sAirport** kopf) {
 	struct sAirport* aktuellesElement;
+	char gradZeichen = 248; //° in ASCII
 	printf("\nFolgenden Flughafendaten sind gespeichert worden...\n");
-	aktuellesElement = **kopf;
+	aktuellesElement = *kopf;
 	if (aktuellesElement == NULL) {
 		printf("Die Liste ist Leer");
 		return;
@@ -202,9 +203,9 @@ void vonHintenAusgabe(sAirport*** kopf) {
 	while (aktuellesElement != NULL) {
 		printf("ICAO: %s\n", aktuellesElement->ICAO);
 		printf("Flughafenname: %s\n", aktuellesElement->flugHafenName);
-		printf("Laengengrad: %lf\n", aktuellesElement->koordnaten.laengenGrad);
-		printf("Breitengrad: %lf\n", aktuellesElement->koordnaten.breitenGrad);
-		printf("Hoehe: %d\n", aktuellesElement->hoehe);
+		printf("Breitengrad: %lf %cN\n", aktuellesElement->koordnaten.breitenGrad, gradZeichen);
+		printf("Laengengrad: %lf %cE\n", aktuellesElement->koordnaten.laengenGrad, gradZeichen);
+		printf("Hoehe: %d ft\n", aktuellesElement->hoehe);
 		printf("Laenderkuerzel: %s\n\n", aktuellesElement->laenderKuerzel);
 		aktuellesElement = aktuellesElement->prev;
 	}
@@ -301,14 +302,14 @@ Dabei wird vom Benutzer einer Eingabe erwertet, die den Nachnamen erfragt.
 Parameter: kopf der Liste, string zum Vergleich
 Rückgabewert: Element einer Liste
 */
-sAirport* suche2(sAirport**** kopf, char* name)
+sAirport* suche2(sAirport** kopf, char* name)
 {
 	struct sAirport* aktuellesElement, * temporaeresElement;
 	temporaeresElement = (struct sAirport*)malloc(sizeof(struct sAirport));
 
 	int i = 0, Kennzeichnung;
 	int dataLength;
-	aktuellesElement = ***kopf;
+	aktuellesElement = *kopf;
 	if (temporaeresElement == NULL)
 	{
 		printf("\nSpeicherueberfluss\n");
@@ -361,13 +362,13 @@ Dabei wird vom Benutzer einer Eingabe erwertet, die den Nachnamen erfragt.
 Parameter: kopf der Liste, string zum Vergleich
 Rückgabewert: int Prüfvariable
 */
-int suche3(sAirport**** kopf, char* name)
+int suche3(sAirport** kopf, char* name)
 {
 	struct sAirport* aktuellesElement, * temporaeresElement;
 	temporaeresElement = (struct sAirport*)malloc(sizeof(struct sAirport));
 
 	int i = 0, Kennzeichnung;
-	aktuellesElement = ***kopf;
+	aktuellesElement = *kopf;
 	if (temporaeresElement == NULL)
 	{
 		printf("\nSpeicherueberfluss\n");
@@ -411,12 +412,12 @@ Dabei wird vom Benutzer einer Eingabe erwertet, die den Nachnamen erfragt.
 Parameter: kopf der Liste, string zum Vergleich
 Rückgabewert: void
 */
-void suche4(sAirport*** kopf, char* name)
+void suche4(sAirport** kopf, char* name)
 {
 	struct sAirport* aktuellesElement;
 
 	int i = 0, Kennzeichnung = 0;
-	aktuellesElement = **kopf;
+	aktuellesElement = *kopf;
 
 	if (aktuellesElement == NULL)
 	{
@@ -461,7 +462,7 @@ In dieser Funktion werden die Elemente von den wegpunkten in eine neue Liste sor
 Parameter: kopf der Liste, kopf der Wegpunktliste, name des Flughafens
 Rückgabewert: void
 */
-void listeEinsetzen2(sAirport*** kopf, sAirport** kopfWegpunkt, char* name) {
+void listeEinsetzen2(sAirport** kopf, sAirport** kopfWegpunkt, char* name) {
 	sAirport* aktuellesElement, * temporaeresElement;
 
 	aktuellesElement = (struct sAirport*)malloc(sizeof(struct sAirport));
@@ -474,7 +475,7 @@ void listeEinsetzen2(sAirport*** kopf, sAirport** kopfWegpunkt, char* name) {
 		//Daten einlesen
 		aktuellesElement = *kopfWegpunkt;
 
-		aktuellesElement = suche2(&kopf, name);
+		aktuellesElement = suche2(kopf, name);
 		if (aktuellesElement == NULL) {
 			printf("\nSpeicherüberlauf");
 			return;
@@ -540,8 +541,8 @@ sAirport* enterWaypoints(sAirport** kopf, int n, int* m) {
 			exit(-1);
 		}
 		strcpy_s(name, nameLaenge, nameTempBuffer);
-		fehlerCheckEingabe(&kopf, name, i);
-		listeEinsetzen2(&kopf, &kopfWegpunkt, name);
+		fehlerCheckEingabe(kopf, name, i);
+		listeEinsetzen2(kopf, &kopfWegpunkt, name);
 	}
 
 	return(kopfWegpunkt);
@@ -554,11 +555,11 @@ Diese Funktion dient zur Fehler überprüfung
 Parameter: kopf der Liste, string zum Vergleich, Position des Elemente in der neuen Liste
 Rückgabewert: Kopf der nuenen Liste mit den Wegpunkten
 */
-void fehlerCheckEingabe(sAirport*** kopf, char *name, int i) {
+void fehlerCheckEingabe(sAirport** kopf, char *name, int i) {
 	char nameTempBuffer[BUFFER_GROESSE];
 	int nameLaenge = 0;
 	
-	while (suche3(&kopf, name) != 0) {
+	while (suche3(kopf, name) != 0) {
 		printf("Falsche Eingabe, wiederholen Sie die Eingabe\n");
 		printf("Geben sie den %d. Wegpunkt ein:", i);
 		printf("\n");
@@ -644,7 +645,7 @@ Rückgabewert: void
 void loescheListe3(sAirport** kopfWegpunkt)
 {
 	int i;
-	int anzElemente = zaehleAnzListenElemente2(&kopfWegpunkt);
+	int anzElemente = zaehleAnzListenElemente2(kopfWegpunkt);
 	for (i = 0; i < anzElemente; i++)
 	{
 		sAirport* zuLoeschendesElement = *kopfWegpunkt;//Aus der Kombination dieser Zeiler 
@@ -675,10 +676,10 @@ In dieser Funktion wird die Anzahl der Listenelementen ausgegeben.
 Parameter: kopf der Liste
 Rückgabewert: int
 */
-int zaehleAnzListenElemente2(sAirport*** kopfWegpunkt) {
+int zaehleAnzListenElemente2(sAirport** kopfWegpunkt) {
 	sAirport* aktuellesElement;
 	int anzahl = 0;
-	aktuellesElement = **kopfWegpunkt;
+	aktuellesElement = *kopfWegpunkt;
 
 	while (aktuellesElement != NULL) {
 		aktuellesElement = aktuellesElement->next;
@@ -702,10 +703,9 @@ void naehesterFlughafen(sAirport** kopf, int n) {
 	double laengenGrad;
 	double b;
 	double d = 0;
-	double naehesterFlughafen = 0;
 	char* tempICAO = {"0"};
 	int tempICAOlaenge;
-	double tempNaehesterFlughafen = 0;
+	double tempNaehesterFlughafenLaenge = -1;
 	printf("Geben Sie den Breitengrad ein:\n");
 	test1 = scanf_s("%lf", &breitenGrad);
 	fehlerCheckDouble(test1, &breitenGrad);
@@ -722,7 +722,7 @@ void naehesterFlughafen(sAirport** kopf, int n) {
 			b = acos(sin((((double)breitenGrad) / 360) * 2 * M_PI) * sin((((double)aktuellerFlughafen->koordnaten.breitenGrad) / 360) * 2 * M_PI) + cos((((double)breitenGrad) / 360) * 2 * M_PI) * cos((((double)aktuellerFlughafen->koordnaten.breitenGrad) / 360) * 2 * M_PI) * cos((((double)aktuellerFlughafen->koordnaten.laengenGrad - (double)laengenGrad) / 360) * 2 * M_PI));
 			d = b * (double)ERDRADIUS;
 			
-			if (tempNaehesterFlughafen > d)
+			if (tempNaehesterFlughafenLaenge > d || tempNaehesterFlughafenLaenge == -1) //tempNaehesterFlughafenLaenge == -1 für die Abfrage des Ersten Verglechs
 			{
 				tempICAOlaenge = strlen(aktuellerFlughafen->ICAO);
 				tempICAO = (char*)malloc(tempICAOlaenge * sizeof(char));
@@ -731,14 +731,14 @@ void naehesterFlughafen(sAirport** kopf, int n) {
 					return;
 				}
 				strcpy_s(tempICAO, tempICAOlaenge+1, aktuellerFlughafen->ICAO);
-				naehesterFlughafen = d;
+				tempNaehesterFlughafenLaenge = d;
 			}
-			tempNaehesterFlughafen = d;
+			
 			aktuellerFlughafen = aktuellerFlughafen->next;
 			
 		}
-	suche4(&kopf, tempICAO);
-	printf("Distanz: %lf km\n", naehesterFlughafen);
+	suche4(kopf, tempICAO);
+	printf("Distanz: %lf km\n", tempNaehesterFlughafenLaenge);
 
 }
 
@@ -758,3 +758,4 @@ void fehlerCheckDouble(int test1, double* x) {
 	}
 	return;
 }
+
